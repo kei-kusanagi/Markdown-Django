@@ -1,5 +1,31 @@
-# Created by https://www.toptal.com/developers/gitignore/api/django
-# Edit at https://www.toptal.com/developers/gitignore?templates=django
+# to exclude Obsidian workspace settings (including plugin and hotkey configurations)
+.obsidian/*
+
+# OR only to exclude workspace cache
+.obsidian/workspace/*
+
+# Exclude plugins
+.obsidian/plugins/*
+
+# Exclude consultant specific files "personal"
+05*-*Personal/
+
+# Exclude Day Planner directory placed in vault root
+Day*Planners/*
+
+# This file is used to keep track of last auto backup/pull
+.obsidian-git-data
+
+# Exclude Untitled Notes
+Untitled*
+# Exclude "bad" names
+null*
+
+# Add below lines to exclude OS settings and caches
+.trash/
+.DS_Store
+# Created by https://www.toptal.com/developers/gitignore/api/obsidian,django
+# Edit at https://www.toptal.com/developers/gitignore?templates=obsidian,django
 
 ### Django ###
 *.log
@@ -171,4 +197,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# End of https://www.toptal.com/developers/gitignore/api/django
+### Obsidian ###
+# config dir
+.obsidian/
+
+# End of https://www.toptal.com/developers/gitignore/api/obsidian,django

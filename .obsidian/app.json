@@ -1,5 +1,10 @@
 {
   "legacyEditor": false,
   "livePreview": true,
-  "attachmentFolderPath": "README IMG"
+  "attachmentFolderPath": "README IMG",
+  "spellcheck": true,
+  "spellcheckLanguages": [
+    "es-419",
+    "en-US"
+  ]
 }
