@@ -199,3 +199,130 @@ urlpatterns = [
 salvamos y vamos a nuestra pagina y refrescamos
 
 ![image](README%20IMG/Pasted%20image%2020220707140919.png)
+
+bonito, ahora creamos un nuevo archivo llamado /blog/templates/blog/detail.html
+
+```
+{% extends 'blog/base.html' %}
+
+  
+
+{% block content %}
+
+    <div class="box">
+
+        <section class="hero is-primary is-medium">
+
+            <div class="hero-body">
+
+                <p class="title">{{ post.title }}</p>
+
+                <p class="subtitle">{{ post.created_ad|date:"Y-m-d H:i" }}</p>
+
+            </div>
+
+        </section>
+
+  
+
+        <div class="content intro">
+
+            <p>{{ post.intro }}</p>
+
+        </div>
+
+  
+
+        <div class="content">
+
+            {{ post.body }}
+
+        </div>
+
+    </div>
+
+{% endblock %}
+```
+
+ahora vamos a views para declarar nuestra función para llamar esto
+
+```
+...
+
+def detail(request, pk):
+
+    post = Post.objects.get(pk=pk)
+
+  
+
+    return render(request, 'blog/detail.html', {'post': post})
+
+```
+
+y ahora vamos a urls.py y declaramos su path
+
+```
+from django.contrib import admin
+
+from django.urls import path
+
+  
+
+from blog import views
+
+  
+
+urlpatterns = [
+
+    path('admin/', admin.site.urls),
+
+    path('',  views.index, name='index'),
+
+    path('<int:pk>/',  views.detail, name='detail'),
+
+]
+```
+
+y activamos el botón en index.html
+
+```
+...
+
+            <div class="content">
+
+                <p>{{ post.intro }}</p>
+
+  
+
+                <a href="{% url 'detail' post.id %}">Read more</a>
+
+            </div>
+
+        </div>
+
+...
+```
+
+refrescamos nuestra pagina y ahora al darle en "Read more" 
+
+![image](README%20IMG/Pasted%20image%2020220707143545.png)
+
+ahora vamos a nuestro sitio de administración y añadimos lo siguiente a nuestro post 1
+
+```
+The content body for post number 1
+
+**bold text**
+
+# Largue title
+
+### Smaler title
+
+---
+
+```def index(request):
+return render(request, 'index.html')```
+```
+
+se vera super raro, pero aqui es donde activaremos nuestro markdown 
+![image](README%20IMG/Pasted%20image%2020220707143854.png)
