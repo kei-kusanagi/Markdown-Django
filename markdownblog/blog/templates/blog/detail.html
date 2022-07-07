@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 
+{% load blog_extras %}
+
 {% block content %}
     <div class="box">
         <section class="hero is-primary is-medium">
@@ -14,7 +16,7 @@
         </div>
 
         <div class="content">
-            {{ post.body }}
+            {{ post.body|convert_markdown|safe }}
         </div>
     </div>
 {% endblock %}
