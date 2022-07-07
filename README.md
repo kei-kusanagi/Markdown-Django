@@ -326,3 +326,77 @@ return render(request, 'index.html')```
 
 se vera super raro, pero aqui es donde activaremos nuestro markdown 
 ![image](README%20IMG/Pasted%20image%2020220707143854.png)
+
+primero lo instalamos con el comando en la terminal ``pip install markdown``  (ver que el entorno virtual este activado)
+![image](README%20IMG/Pasted%20image%2020220707180832.png)
+
+ya instalado en la carpeta de blog creamos otra carpeta llamada templatetags  y dentro un archivo llamado ``__init__.py``  y otro llamado ``blog_extras.py``, dentro de este ultimo pondremos lo siguiente:
+```
+import markdown
+
+  
+
+from django import template
+
+from django.template.defaultfilters import stringfilter
+
+  
+
+register = template.Library()
+
+  
+
+@register.filter
+
+def convert_markdown(value):
+
+    return markdown.markdown(value)
+```
+
+vamos a nuestro archivo detail.html y justo debajo del "extends base" y hasta abajo en el "post.body" ponemos
+
+```
+{% extends 'blog/base.html' %}
+
+  
+
+{% load blog_extras %}
+
+  
+
+{% block content %}
+
+...
+
+
+  
+
+        <div class="content">
+
+            {{ post.body|convert_markdown|safe }}
+
+        </div>
+
+...
+```
+
+paramos el servidor y lo volvemos a correr y ahora se vera la magia
+
+![image](README%20IMG/Pasted%20image%2020220707183015.png)
+
+ya solo en "blog_extras.py" completamos esta línea y listo
+
+```
+...
+
+@register.filter
+
+@stringfilter
+
+def convert_markdown(value):
+
+    return markdown.markdown(value, extensions=['markdown.extensions.fenced_code'])
+```
+![image](README%20IMG/Pasted%20image%2020220707183700.png)
+
+hemos terminado, no se olviden de suscribirse al canal ✔ y darle click a la campanita 🔔 jajajajaa 🤣🤣🤣🤣
