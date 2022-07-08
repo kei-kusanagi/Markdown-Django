@@ -399,4 +399,78 @@ def convert_markdown(value):
 ```
 ![image](README%20IMG/Pasted%20image%2020220707183700.png)
 
+
+ahora por petición del líder "Lecks👑" usaremos la utilidad de prismjs o moriremos en el intento...
+
+en nuestro proyecto creamos dos carpetas en nuestro carpeta principal (donde esta mardownblog) "markdownblog/static/prism"
+![image](README%20IMG/Pasted%20image%2020220708171122.png)
+ahora vamos a nuestro archivo markdownblog/markdownblog/settings.py y ponemos lo siguiente para que pueda tomar en cuenta nuestra carpeta que le pondremos de css
+
+```
+...
+
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+
+    os.path.join(BASE_DIR, "static\prism"),
+
+]
+
+...
+```
+
+luego vamos a la pagina https://prismjs.com/index.html elegimos el theme y le damos en descargar. Allí erigiremos los lenguajes que queremos, en este caso sera python
+![image](README%20IMG/Pasted%20image%2020220708170904.png)
+
+
+ahora ya elegido nuestro lenguaje podríamos elegir los plugins de abajo pero por ahora lo dejaremos lo mas simple posible, así que solo le daremos "DOWNLOAD JS" y "DOWNLOAD CSS" y lo guardaremos en nuestra carpeta que creamos de static/prism
+
+![image](README%20IMG/Pasted%20image%2020220708171529.png)
+
+Ya con nuestros archivos ahora vamos a llamarlos en nuesto base.html el link justo antes de que termine el head y el script antes que termine el body asi
+
+```
+...
+
+<link rel="stylesheet" href="/static/prism.css">
+
+...
+
+<script src="/static/prism.js"></script>
+
+...
+```
+![image](README%20IMG/Pasted%20image%2020220708172212.png)
+
+vamos a nuestro archivo detail.html y agregamos esto justo donde mandamos a llamar el cuerpo del post (en la documentación viene que después del pre valla code algo así ``<pre><code class=languaje-python">...</code></pre>`` pero nosotros lo dejaremos así ya que ya le dimos formato y necesitamos que funcione con las funciones de markdown que previamente instalamos)
+
+```
+...
+
+<div class="content">
+
+            <pre class="language-python">
+
+                {{ post.body|convert_markdown|safe }}
+
+            </pre>
+
+        </div>
+...
+```
+
+ya casi esta listo, pero tenemos un problema, salen un par de cuadros con sombra mal acomodados gracias a que quitamos lo de ``<code>`` 
+![image](README%20IMG/Pasted%20image%2020220708172815.png)
+
+asi que usamos nuestro devtools y vemos que el problema es una clace que viene directamente del css, asi que vallamos a nuestro archivo prism.css y quitemosla y listo
+![image](README%20IMG/Pasted%20image%2020220708172926.png)
+
+![image](README%20IMG/Pasted%20image%2020220708173136.png)
+
+lo borramos y listoooooooooo ya podemos poner en el body del post texto como markdown y lo que pongamos entre ``` "` ` `" ``` lo tomara como codigo
+
+![image](README%20IMG/Pasted%20image%2020220708173306.png)
+
+
 hemos terminado, no se olviden de suscribirse al canal ✔ y darle click a la campanita 🔔 jajajajaa 🤣🤣🤣🤣
