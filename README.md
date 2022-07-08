@@ -1,3 +1,5 @@
+Proyecto basado en el video [# Django Markdown Tutorial - A Simple Blog Example | Django/Python](https://youtu.be/t61nTi0lIlk) del canal [Code With Stein](https://www.youtube.com/c/CodeWithStein)
+
 Bueno empecemos este nuevo proyecto, creando nuestro entorno virtual como es habitual e inicializando nuestro git y activamos nuestro entorno virtual
 
 ![image](README%20IMG/Pasted%20image%2020220707124831.png)
