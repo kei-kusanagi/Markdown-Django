@@ -1,23 +1,16 @@
-FROM python:3.8-alpine
+FROM python:3.4
 
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE=1
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		postgresql-client \
+	&& rm -rf /var/lib/apt/lists/*
 
-RUN apk update \
-    # psycopg2 dependencies
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add postgresql-dev \
-    # Pillow dependencies
-    && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev \
-    # CFFI dependencies
-    && apk add libffi-dev py-cffi \
-    # Translations dependencies
-    && apk add gettext \
-    # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
-    && apk add postgresql-client
+WORKDIR /usr/src/app
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
-RUN mkdir /markdownblog_app
-WORKDIR /markdownblog_app
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 COPY requirements.txt /markdownblog_app/
 RUN pip install -r requirements.txt
