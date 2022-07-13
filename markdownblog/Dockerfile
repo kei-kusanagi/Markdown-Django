@@ -1,18 +1,17 @@
-FROM python:3.4
+FROM python:3.10.5-alpine3.15
 
-RUN apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		postgresql-client \
-	&& rm -rf /var/lib/apt/lists/*
+ENV PYTHONUNBUFFERED=1
 
-WORKDIR /usr/src/app
-COPY requirements.txt ./
+WORKDIR /app
+
+RUN apk update \
+	&& apk add --no-cache gcc musl-dev postgresql-dev python3-dev libffi-dev \
+	&& pip install --upgrade pip
+
+COPY ./requirements.txt ./
+
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY ./ ./
 
-COPY requirements.txt /markdownblog_app/
-RUN pip install -r requirements.txt
-
-COPY . /markdownblog_app/
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000"]

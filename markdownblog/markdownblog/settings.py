@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-gwjb53cu73)f7&8)vn*dnzqr4k(_821n_vv^2wn5=u8g9(6byg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    '127.0.0.1'
+    ]
 
 # Application definition
 
@@ -118,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static\prism"),
+    os.path.join(BASE_DIR, "/static/prism"),
 ]
 
 # Default primary key field type
